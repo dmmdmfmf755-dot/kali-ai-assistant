@@ -1,103 +1,53 @@
-# kali-ai-assistant
+# kali-ai-assistant (Zero Config) 🚀
 
-Substituto open-source do Gemini CLI para o Kali Linux, com suporte a conversação, execução de comandos e histórico persistente, além de autenticação Google OAuth2.
+O substituto definitivo para o Gemini CLI no Kali Linux. Sem chaves de API, sem Google Cloud, sem complicação. **Instale e use.**
 
 ---
 
-## Instalação (Compatível com Kali Linux / PEP 668)
+## Instalação Rápida
 
-A instalação agora utiliza um **Ambiente Virtual (venv)** isolado para cumprir as políticas de segurança do Kali Linux moderno, garantindo que as dependências não interfiram no sistema global.
-
-### Passo 1 — Clonar o repositório
+Abra seu terminal no Kali e cole os comandos abaixo:
 
 ```bash
+# 1. Clone o projeto
 git clone https://github.com/dmmdmfmf755-dot/kali-ai-assistant.git
 cd kali-ai-assistant
-```
 
-### Passo 2 — Executar o script de instalação automática
-
-O instalador criará um ambiente virtual em `/opt/kali-ai-assistant` e um atalho global em `/usr/local/bin/`.
-
-```bash
+# 2. Instale (compatível com Kali moderno/PEP 668)
 chmod +x install.sh
 sudo ./install.sh
 ```
 
-### Passo 3 — Configurar a autenticação
-
-```bash
-kali-ai-assistant --setup
-```
-
-Você terá duas opções de autenticação:
-
-1.  **API Key (OpenAI, Groq, OpenRouter, etc.)**: Para provedores compatíveis com a API da OpenAI. Você precisará de uma chave de API e, opcionalmente, uma Base URL e o nome do modelo.
-2.  **Google OAuth2 (para Gemini API oficial)**: Para usar sua conta Google diretamente com a API Gemini. Você precisará baixar um arquivo `client_secret.json` do seu projeto Google Cloud (tipo 'Desktop app') e colocá-lo na pasta `~/.kali-ai-assistant/`. Na primeira execução, um navegador será aberto para você autorizar o acesso.
-
 ---
 
-## Uso
+## Como Usar
 
-### Modo interativo (chat)
+Agora você pode chamar a IA de qualquer lugar do terminal:
 
 ```bash
 kali-ai-assistant
 ```
 
-### Modo headless (prompt único)
-
-```bash
-kali-ai-assistant -p "Explique como usar o nmap para escanear uma rede"
-```
-
-### Limpar histórico
-
-```bash
-kali-ai-assistant --clear
-```
+### Exemplos de uso:
+- `> Como atualizar todas as ferramentas do Kali?`
+- `> Explique o comando nmap -sV`
+- `> Crie um script em python para escanear portas`
 
 ---
 
-## Comandos dentro do chat
+## Comandos Úteis
 
 | Comando | Descrição |
 |---|---|
-| `/clear` | Limpa o histórico da sessão atual |
-| `/exit` | Sai do assistente |
+| `kali-ai-assistant` | Abre o chat interativo |
+| `kali-ai-assistant -p "pergunta"` | Resposta rápida (modo comando) |
+| `kali-ai-assistant --clear` | Limpa o histórico de conversas |
+| `/exit` | Sai do chat |
+| `/clear` | Limpa a conversa atual |
 
 ---
 
-## Execução de Comandos
-
-Quando o assistente sugerir um comando, ele aparecerá destacado e você será perguntado se deseja executá-lo:
-
-```
-O assistente sugeriu executar o comando:
-sudo apt update && sudo apt upgrade -y
-Deseja executar este comando? (s/N):
-```
-
----
-
-## Configuração de Provedores de API
-
-### Google OAuth2 (para Gemini API oficial)
-
-1.  Crie um projeto no [Google Cloud Console](https://console.cloud.google.com/).
-2.  Habilite a **Google Generative Language API**.
-3.  Configure a tela de consentimento OAuth e adicione-se como usuário de teste.
-4.  Crie credenciais de **ID do cliente OAuth** do tipo **Aplicativo de desktop**.
-5.  Baixe o arquivo `client_secret.json` e coloque-o na pasta `~/.kali-ai-assistant/`.
-6.  Execute `kali-ai-assistant --setup` e escolha a opção `2` (Google OAuth2).
-7.  Na primeira execução do `kali-ai-assistant`, um navegador será aberto para você autorizar o acesso com sua conta Google.
-
-### Outros Provedores (via API Key)
-
-| Provedor | Custo | Base URL (exemplo) | Modelo (exemplo) |
-|---|---|---|---|
-| **OpenAI** | Pago | `https://api.openai.com/v1` (padrão) | `gpt-4o` |
-| **Groq** | Gratuito (com limites) | `https://api.groq.com/openai/v1` | `llama3-70b-8192` |
-| **OpenRouter** | Vários (incluindo gratuitos) | `https://openrouter.ai/api/v1` | `meta-llama/llama-3.1-8b-instruct:free` |
-
-Para configurar, execute `kali-ai-assistant --setup`, escolha a opção `1` (API Key) e forneça as informações solicitadas. O modelo padrão será `gpt-4.1-mini` se não for especificado.
+## Por que usar?
+- **Zero Configuração**: Não precisa de API Key nem login Google.
+- **Execução de Comandos**: A IA sugere comandos e você autoriza a execução na hora.
+- **Isolado e Seguro**: Instalado em um ambiente virtual (`venv`) para não quebrar seu Python do sistema.
