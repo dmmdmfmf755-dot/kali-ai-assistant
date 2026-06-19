@@ -1,33 +1,35 @@
 # kali-ai-assistant
 
-Substituto open-source do Gemini CLI para o Kali Linux, com suporte a conversação, execução de comandos e histórico persistente.
+Substituto open-source do Gemini CLI para o Kali Linux, com suporte a conversação, execução de comandos e histórico persistente, além de autenticação Google OAuth2.
 
 ---
 
 ## Instalação
 
-### Passo 1 — Baixar os arquivos
+### Passo 1 — Clonar o repositório
 
-Coloque os arquivos `kali-ai-assistant.py` e `install.sh` na mesma pasta e execute:
+```bash
+git clone https://github.com/dmmdmfmf755-dot/kali-ai-assistant.git
+cd kali-ai-assistant
+```
+
+### Passo 2 — Executar o script de instalação
 
 ```bash
 chmod +x install.sh
 sudo ./install.sh
 ```
 
-### Passo 2 — Configurar a API Key
+### Passo 3 — Configurar a autenticação
 
 ```bash
 kali-ai-assistant --setup
 ```
 
-Você precisará de uma **API Key** de um provedor compatível com OpenAI. Opções recomendadas:
+Você terá duas opções de autenticação:
 
-| Provedor | Modelos | Custo | Link |
-|---|---|---|---|
-| OpenAI | GPT-4o, GPT-4 | Pago | https://platform.openai.com |
-| Groq | LLaMA 3, Mixtral | Gratuito (com limites) | https://console.groq.com |
-| OpenRouter | Vários (incluindo gratuitos) | Gratuito/Pago | https://openrouter.ai |
+1.  **API Key (OpenAI, Groq, OpenRouter, etc.)**: Para provedores compatíveis com a API da OpenAI. Você precisará de uma chave de API e, opcionalmente, uma Base URL e o nome do modelo.
+2.  **Google OAuth2 (para Gemini API oficial)**: Para usar sua conta Google diretamente com a API Gemini. Você precisará baixar um arquivo `client_secret.json` do seu projeto Google Cloud (tipo 'Desktop app') e colocá-lo na pasta `~/.kali-ai-assistant/`. Na primeira execução, um navegador será aberto para você autorizar o acesso.
 
 ---
 
@@ -74,22 +76,24 @@ Deseja executar este comando? (s/N):
 
 ---
 
-## Configuração com Groq (gratuito)
+## Configuração de Provedores de API
 
-1. Acesse https://console.groq.com e crie uma conta
-2. Gere uma API Key
-3. Execute `kali-ai-assistant --setup`
-4. Cole sua API Key
-5. Em **Base URL**, coloque: `https://api.groq.com/openai/v1`
-6. Em **Modelo**, coloque: `llama3-70b-8192`
+### Google OAuth2 (para Gemini API oficial)
 
----
+1.  Crie um projeto no [Google Cloud Console](https://console.cloud.google.com/).
+2.  Habilite a **Google Generative Language API**.
+3.  Configure a tela de consentimento OAuth e adicione-se como usuário de teste.
+4.  Crie credenciais de **ID do cliente OAuth** do tipo **Aplicativo de desktop**.
+5.  Baixe o arquivo `client_secret.json` e coloque-o na pasta `~/.kali-ai-assistant/`.
+6.  Execute `kali-ai-assistant --setup` e escolha a opção `2` (Google OAuth2).
+7.  Na primeira execução do `kali-ai-assistant`, um navegador será aberto para você autorizar o acesso com sua conta Google.
 
-## Configuração com OpenRouter (modelos gratuitos)
+### Outros Provedores (via API Key)
 
-1. Acesse https://openrouter.ai e crie uma conta
-2. Gere uma API Key
-3. Execute `kali-ai-assistant --setup`
-4. Cole sua API Key
-5. Em **Base URL**, coloque: `https://openrouter.ai/api/v1`
-6. Em **Modelo**, coloque: `meta-llama/llama-3.1-8b-instruct:free`
+| Provedor | Custo | Base URL (exemplo) | Modelo (exemplo) |
+|---|---|---|---|
+| **OpenAI** | Pago | `https://api.openai.com/v1` (padrão) | `gpt-4o` |
+| **Groq** | Gratuito (com limites) | `https://api.groq.com/openai/v1` | `llama3-70b-8192` |
+| **OpenRouter** | Vários (incluindo gratuitos) | `https://openrouter.ai/api/v1` | `meta-llama/llama-3.1-8b-instruct:free` |
+
+Para configurar, execute `kali-ai-assistant --setup`, escolha a opção `1` (API Key) e forneça as informações solicitadas. O modelo padrão será `gpt-4.1-mini` se não for especificado.
