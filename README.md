@@ -4,7 +4,9 @@ Substituto open-source do Gemini CLI para o Kali Linux, com suporte a conversaç
 
 ---
 
-## Instalação
+## Instalação (Compatível com Kali Linux / PEP 668)
+
+A instalação agora utiliza um **Ambiente Virtual (venv)** isolado para cumprir as políticas de segurança do Kali Linux moderno, garantindo que as dependências não interfiram no sistema global.
 
 ### Passo 1 — Clonar o repositório
 
@@ -13,7 +15,9 @@ git clone https://github.com/dmmdmfmf755-dot/kali-ai-assistant.git
 cd kali-ai-assistant
 ```
 
-### Passo 2 — Executar o script de instalação
+### Passo 2 — Executar o script de instalação automática
+
+O instalador criará um ambiente virtual em `/opt/kali-ai-assistant` e um atalho global em `/usr/local/bin/`.
 
 ```bash
 chmod +x install.sh
